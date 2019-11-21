@@ -14,6 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+INFLATION_CSV = os.path.join(BASE_DIR, 'inflation_russia.csv')
 
 
 # Quick-start development settings - unsuitable for production
@@ -61,6 +62,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'color_filter': 'app.tampletags.color_filter'
+            }
         },
     },
 ]

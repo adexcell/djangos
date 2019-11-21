@@ -1,6 +1,7 @@
 <!DOCTYPE html>{% load static %}
+{% load color_filter %}
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <title>Инфляция в России</title>
     <!--Import Google Icon Font-->
@@ -10,19 +11,38 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  </head>
+</head>
 
-  <body>
-    {% block content %}
-      <div class="row">
-        <h1 class="col s12">Инфляция в России</h1>
-        <div class="col s12 m8">
-        
-        <!-- Ваша логика -->
+<body>
+{% block content %}
+<div class="row">
+    <h1 class="col s12">Инфляция в России</h1>
+    <div class="col s12 m8">
 
-        </div>
-      </div>
-    {% endblock %}
+        <table>
+            <tr>
+                {% for field in fieldnames%}
+                <td>{{field}}</td>
+                {% endfor %}
+            </tr>
+            {% for line in rows %}
+            <tr>
+                {% for key,value in line.items %}
+                {% if key != fieldnames|first and key != fieldnames|last %}
+                <td style="background:{{value|pick_color}}">{{value|default:'-'}}</td>
+                {% elif key == fieldnames|last %}
+                <td style="background:#808080">{{value}}</td>
+                {% else %}
+                <td>{{value}}</td>
+                {% endif %}
+                {%endfor%}
+            </tr>
+            {% endfor %}
+        </table>
 
-  </body>
+    </div>
+</div>
+{% endblock %}
+
+</body>
 </html>
